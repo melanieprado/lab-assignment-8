@@ -6,6 +6,7 @@ int extraMemoryAllocated;
 
 void swap(int* a, int* b)
 {
+
     int temp = *a;
     *a = *b;
     *b = temp;
@@ -18,22 +19,36 @@ void heapify(int arr[], int N, int i)
 {
     // Find largest among root,
     // left child and right child
+
+    // Initialize largest as root
     int largest = i;
-    int left = 2*i + 1;
-    int right = 2*i + 2;
+
+    // left = 2*i + 1
+    int left = 2 * i + 1;
+
+    // right = 2*i + 2
+    int right = 2 * i + 2;
 
     // If left child is larger than root
-    if (left<N && arr[left]>arr[largest]){
+    if (left < N && arr[left] > arr[largest])
+
         largest = left;
-    }
+
     // If right child is larger than largest
-    if (right<N && arr[right]>arr[largest]){
+    // so far
+    if (right < N && arr[right] > arr[largest])
+
         largest = right;
-    }
+
     // Swap and continue heapifying
-    if (largest != i){
+    // if root is not largest
+    // If largest is not root
+    if (largest != i) {
+
         swap(&arr[i], &arr[largest]);
-        // Recursively heapify
+
+        // Recursively heapify the affected
+        // sub-tree
         heapify(arr, N, largest);
     }
 }
@@ -42,13 +57,18 @@ void heapify(int arr[], int N, int i)
 // extraMemoryAllocated counts bytes of memory allocated
 void heapSort(int arr[], int n) {
       // Build max heap
-    for (int i=n/2-1; i>=0; i--){
+    for (int i = n/2-1; i >= 0; i--)
+
         heapify(arr, n, i);
-    }
+
     // Heap sort
-    for (int i=n-1; i>=0; i--) {
+    for (int i = n-1; i >= 0; i--) {
+
         swap(&arr[0], &arr[i]);
+
         // Heapify root element
+        // to get highest element at
+        // root again
         heapify(arr, i, 0);
     }
 }
@@ -179,7 +199,7 @@ int main(void) {
     heapSort(pDataCopy, dataSz);
     end = clock();
     cpu_time_used = ((double)(end - start)) / CLOCKS_PER_SEC;
-    printf("\truntime\t\t\t: %.1lf\n", cpu_time_used);
+    printf("\truntime\t\t\t: %.9lf\n", cpu_time_used);
     printf("\textra memory allocated\t: %d\n", extraMemoryAllocated);
     printArray(pDataCopy, dataSz);
 
@@ -190,7 +210,7 @@ int main(void) {
     mergeSort(pDataCopy, 0, dataSz - 1);
     end = clock();
     cpu_time_used = ((double)(end - start)) / CLOCKS_PER_SEC;
-    printf("\truntime\t\t\t: %.1lf\n", cpu_time_used);
+    printf("\truntime\t\t\t: %.9lf\n", cpu_time_used);
     printf("\textra memory allocated\t: %d\n", extraMemoryAllocated);
     printArray(pDataCopy, dataSz);
 
